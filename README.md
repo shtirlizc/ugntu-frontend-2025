@@ -35,7 +35,6 @@
   - [ ] Удалить старые файлы из проекта
   - [ ] Установить [nodejs](https://nodejs.org/en/download)
   - [ ] Проверить работы в командной строке `node -v`
-  - [ ] Инициировать package.json `npm init`
   - [ ] Установить reactjs `npx create-react-router@latest`
   - [ ] Закоммитить изменения
 - [ ] Установка приложений
