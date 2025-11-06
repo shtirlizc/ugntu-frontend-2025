@@ -35,7 +35,7 @@
   - [ ] Удалить старые файлы из проекта
   - [ ] Установить [nodejs](https://nodejs.org/en/download)
   - [ ] Проверить работы в командной строке `node -v`
-  - [ ] Установить reactjs `npx create-react-router@latest`
+  - [ ] Установить reactjs с помощью vite `npm create vite@latest` (reactjs, javascript)
   - [ ] Закоммитить изменения
 - [ ] Установка приложений
   - [ ] Установить [ant.design](https://ant.design/)
