@@ -4,81 +4,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Демонстрация HTML, CSS и JavaScript</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="./styles.css">
 </head>
+
 <body>
-    <header>
-        <h1>Интерактивная демонстрация</h1>
-        <p>Пример взаимодействия HTML, CSS и JavaScript</p>
-    </header>
+    <h1>title 1</h1>
+    <h2>title 2</h2>
 
-    <main>
-        <section class="demo-section">
-            <h2>Кнопки и события</h2>
-            <div class="button-group">
-                <button id="colorBtn" class="demo-btn">Изменить цвет</button>
-                <button id="textBtn" class="demo-btn">Изменить текст</button>
-                <button id="hideBtn" class="demo-btn">Скрыть/показать</button>
-            </div>
-            <div id="demoText" class="demo-text">
-                Этот текст можно изменить с помощью кнопок выше
-            </div>
-        </section>
+    <h6>title 6</h6>
 
-        <section class="demo-section">
-            <h2>Формы и валидация</h2>
-            <form id="demoForm" class="demo-form">
-                <div class="form-group">
-                    <label for="name">Имя:</label>
-                    <input type="text" id="name" name="name" required>
-                    <span class="error-message" id="nameError"></span>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" required>
-                    <span class="error-message" id="emailError"></span>
-                </div>
-                <button type="submit" class="submit-btn">Отправить</button>
-            </form>
-            <div id="formResult" class="form-result"></div>
-        </section>
 
-        <section class="demo-section">
-            <h2>Анимации и эффекты</h2>
-            <div class="animation-demo">
-                <div id="animatedBox" class="animated-box"></div>
-                <button id="animateBtn" class="demo-btn">Запустить анимацию</button>
-            </div>
-        </section>
-
-        <section class="demo-section">
-            <h2>Список задач</h2>
-            <div class="todo-container">
-                <input type="text" id="todoInput" placeholder="Добавить новую задачу...">
-                <button id="addTodoBtn" class="demo-btn">Добавить</button>
-                <ul id="todoList" class="todo-list"></ul>
-            </div>
-        </section>
-
-        <section class="demo-section">
-            <h2>Модальное окно</h2>
-            <button id="modalBtn" class="demo-btn">Открыть модальное окно</button>
-        </section>
-    </main>
-
-    <!-- Модальное окно -->
-    <div id="modal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h3>Модальное окно</h3>
-            <p>Это пример модального окна, созданного с помощью JavaScript.</p>
-        </div>
+    <div id="wrapper">
+        <h3 style="color: orange; border: 3px dashed blue;">Hello H3</h3>
     </div>
 
-    <footer>
-        <p>&copy; 2025 Демонстрация веб-технологий</p>
-    </footer>
 
-    <script src="script.js"></script>
+    <p>paragraph</p>
+    <br>
+    <br>
+    <br>
+    <br>
+    <p style="border: 2px dashed red">paragraph 2</p>
+
+    <img src="./assets/logo-large.svg" alt="logo" />
+
+    <a href="./about.html">My about page</a>
+    
+    <h3>Most popular search systems</h3>
+
+    <ul>
+        <li>
+            <a href="https://google.com">
+                <span>Google</span>
+            </a>
+        </li>
+        <li>
+            <a href="https://ya.com">Yandex</a>
+        </li>
+        <li>
+            <a href="https://bing.com">Bing</a>
+        </li>
+    </ul>
+
+    <script src="./script.js"></script>
 </body>
 </html>
