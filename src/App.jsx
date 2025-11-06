@@ -1,21 +1,65 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import React from 'react';
+import { Button, Flex, Dropdown, Space } from 'antd';
+import { DownOutlined, SmileOutlined } from '@ant-design/icons';
 import './App.css'
-import {TextsFunc} from "./texts.jsx";
+
+const items = [
+    {
+        key: '1',
+        label: (
+            <a target="_blank" rel="noopener noreferrer" href="https://www.antgroup.com">
+                1st menu item
+            </a>
+        ),
+    },
+    {
+        key: '2',
+        label: (
+            <a target="_blank" rel="noopener noreferrer" href="https://www.aliyun.com">
+                2nd menu item (disabled)
+            </a>
+        ),
+        icon: <SmileOutlined />,
+        disabled: true,
+    },
+    {
+        key: '3',
+        label: (
+            <a target="_blank" rel="noopener noreferrer" href="https://www.luohanacademy.com">
+                3rd menu item (disabled)
+            </a>
+        ),
+        disabled: true,
+    },
+    {
+        key: '4',
+        danger: true,
+        label: 'a danger item',
+    },
+];
 
 function App() {
-    // wrapper
-    // const h3El = document.createElement('h3');
-    // h3El.style.color = 'orange';
-    // h3El.style.border = '3px dashed blue';
-    // h3El.innerText = obj.obj2.field12122;
-    // append to wrapper
 
   return (
     <div>
-        <h3 style={{ color: 'orange', border: '3px dashed blue' }}>Hello react</h3>
-        <TextsFunc attr="My title 2 text" attr2="My new title 3 text" />
+        <Flex gap="small" wrap>
+            <Button type="primary">Primary Button</Button>
+            <Button>Default Button</Button>
+            <Button type="dashed">Dashed Button</Button>
+            <Button type="text">Text Button</Button>
+            <Button type="link">Link Button</Button>
+        </Flex>
+
+        <br/>
+
+        <Dropdown menu={{ items }}>
+            <a onClick={e => e.preventDefault()}>
+                <Space>
+                    Hover me
+                    <DownOutlined />
+                </Space>
+            </a>
+        </Dropdown>
     </div>
   )
 }
