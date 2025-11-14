@@ -1,13 +1,14 @@
 import OrangeBox from './orangeBox.jsx';
 
-function GreenBox(props) {
-    console.log('####: props', props);
-    let updatedTitle = props.greenTitle + '!!!';
+function Modal(props) {
+    
 
     return (
         <div style={{ border: '3px dashed green' }}>
-            <h2>{updatedTitle}</h2>
-            <OrangeBox orangeTitle={props.orangeTitle} />
+            {props.children}
+
+            <button onClick={props.onOK}>OK</button>
+            <button onClick={props.onCancel}>Cancel</button>
         </div>
     )
 }

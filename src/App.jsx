@@ -1,19 +1,42 @@
 
 import './App.css'
-import GreenBox from './greenBox.jsx';
-import BlueBox from './blueBox.jsx';
+import React, { useState } from 'react';
+import { Input, Button, Flex, Modal } from 'antd';
 
 function App() {
+  const [inputText, setInputText] = useState('');
+  function handleInputChange(e) {
+    setInputText(e.target.value);
+  }
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+  const handleOk = () => {
+    setIsModalOpen(false);
+    setInputText('');
+  };
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
 
   return (
-    <div style={{ border: '3px dashed red' }}>
-      <GreenBox
-        greenTitle='My props green title'
-        orangeTitle='My props orange title'
-      ></GreenBox>
-      <BlueBox />
-    </div>
+    <div>
+    <Flex gap={16} align="start">
+      <Input value={inputText} onChange={handleInputChange} />
+       <Button type="primary" onClick={showModal}>Показать в модальном окне</Button>
+    </Flex>
+
+    <Modal
+        closable={{ 'aria-label': 'Custom Close Button' }}
+        open={isModalOpen}
+        onOk={handleOk}
+        onCancel={handleCancel}
+      >
+        <p>{inputText}</p>
+      </Modal>
+      </div>
   )
 }
 
