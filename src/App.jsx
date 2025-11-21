@@ -1,42 +1,34 @@
 
 import './App.css'
-import React, { useState } from 'react';
-import { Input, Button, Flex, Modal } from 'antd';
+import React, {useEffect, useState} from 'react';
+import { supabase } from './supabaseClient.js';
 
 function App() {
-  const [inputText, setInputText] = useState('');
-  function handleInputChange(e) {
-    setInputText(e.target.value);
-  }
+    const [tasks, setTasks] = useState([]);
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const showModal = () => {
-    setIsModalOpen(true);
-  };
-  const handleOk = () => {
-    setIsModalOpen(false);
-    setInputText('');
-  };
-  const handleCancel = () => {
-    setIsModalOpen(false);
-  };
+    useEffect(() => {
+       async function getTodos() {
+            const { data: todos } = await supabase.from('tasks').select('*');
+
+            if(todos) {
+                setTasks(todos);
+            }
+        }
+
+        getTodos().then();
+    }, []);
 
   return (
-    <div>
-    <Flex gap={16} align="start">
-      <Input value={inputText} onChange={handleInputChange} />
-       <Button type="primary" onClick={showModal}>Показать в модальном окне</Button>
-    </Flex>
-
-    <Modal
-        closable={{ 'aria-label': 'Custom Close Button' }}
-        open={isModalOpen}
-        onOk={handleOk}
-        onCancel={handleCancel}
-      >
-        <p>{inputText}</p>
-      </Modal>
-      </div>
+    <div>{
+        tasks.map(task => {
+            return (
+                <div key={task.id}>
+                    <span>{task.name}</span>{' '}
+                    <input type="checkbox" checked={task.done} />
+                </div>
+            )
+        })
+    }</div>
   )
 }
 
