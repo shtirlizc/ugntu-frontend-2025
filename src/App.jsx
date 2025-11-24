@@ -1,76 +1,71 @@
 import React, {useEffect, useState} from 'react';
-
-
-import {  Button, Flex, Input } from 'antd';
-
+import { Col, Row, Typography, Table, Button} from 'antd';
 import { supabase } from './supabaseClient.js';
-import {Task} from "./task.jsx";
+import {TaskList} from "./task-list.jsx";
+
+const { Title } = Typography;
 
 function App() {
-    const [tasks, setTasks] = useState([]);
+    const [taskLists, setTaskLists] = useState([]);
+    const [selectedList, setSelectedList] = useState(null);
 
     useEffect(() => {
-       async function getTodos() {
-            const { data: todos } = await supabase.from('tasks').select('*');
+        async function getLists() {
+            const { data: lists } = await supabase.from('allLists').select('*');
 
-            if(todos) {
-                setTasks(todos);
+            if(lists) {
+                setTaskLists(lists);
             }
         }
 
-        getTodos().then();
+        getLists().then();
     }, []);
 
-    const [newTask, setNewTask] = useState('');
-    const handleChangeNewTask = (e) => {
-        setNewTask(e.target.value);
-    }
-
-    const addNewTask = async () => {
-        const response = await supabase.from('tasks').insert({ name: newTask.trim(), done: false }).select();
-
-        if (response.error === null) {
-            const insertedTask = response.data.at(0);
-            setTasks([...tasks, insertedTask]);
-            setNewTask('');
-        } else {
-            console.error('Error adding task', response.error);
-        }
-    }
-
-    const onUpdateTask = (id, name, done) => {
-        setTasks(tasks.map(task => {
-            if (task.id === id) {
-               return {
-                   ...task,
-                   name,
-                   done,
-               }
+    const columns = [
+        {
+            title: 'List name',
+            dataIndex: 'listName',
+            id: 'listName',
+        },
+        {
+            title: 'Author',
+            dataIndex: 'author',
+            id: 'author',
+        },
+        {
+            title: 'CreatedAt',
+            dataIndex: 'created_at',
+            id: 'created_at',
+            render: (_, record) => {
+                const date = new Date(record.created_at);
+                return date.toDateString();
             }
+        },
+        {
+            dataIndex: 'select',
+            id: 'select',
+            render: (_, record) => {
+                return <Button onClick={() => {
+                    setSelectedList(record);
+                }}>Select</Button>;
+            }
+        }
+    ];
 
-            return task;
-        }));
-    }
-    const onDeleteTask = (id) => {
-        setTasks(tasks.filter(task => task.id !== id));
-    }
+   return (
+       <Row>
+           <Col span={12}>
+               <Title level={2}>Task lists</Title>
 
-    const sortedTasks = tasks.sort((a, b) => {
-        return a.id - b.id;
-    })
+               <Table dataSource={taskLists} columns={columns} pagination={false} />
+           </Col>
 
-  return (
-    <Flex vertical gap={16} style={{ maxWidth: 400, padding: 20 }}>
-        {sortedTasks.map(task => {
-            return (
-                <Task key={task.id} task={task} onUpdateTask={onUpdateTask} onDeleteTask={onDeleteTask} />
-            )
-        })
-    }
-        <Input placeholder="New task" value={newTask} onChange={handleChangeNewTask} />
-        <Button type="primary" disabled={newTask.trim() === ''} onClick={addNewTask}>Add task</Button>
-    </Flex>
-  )
+           <Col span={12}>
+               {selectedList !== null && <TaskList id={selectedList.id} name={selectedList.listName} />}
+           </Col>
+       </Row>
+
+   )
 }
 
 export default App
