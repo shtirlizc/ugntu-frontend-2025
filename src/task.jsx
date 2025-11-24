@@ -33,8 +33,6 @@ export const Task = (props) => {
     const handleDoneTask = async (e) => {
         const response = await supabase.from('tasks').update({ done: e.target.checked }).eq('id', task.id);
 
-        console.log('response', response);
-
         if (response.error === null) {
             props.onUpdateTask(task.id, task.name, e.target.checked);
         } else {

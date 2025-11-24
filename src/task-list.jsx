@@ -10,7 +10,7 @@ export const TaskList = (props) => {
 
     useEffect(() => {
         async function getTodos() {
-            const { data: todos } = await supabase.from('tasks').select('*');
+            const { data: todos } = await supabase.from('tasks').select('*').eq('allListId', props.id);
 
             if(todos) {
                 setTasks(todos);
@@ -18,7 +18,7 @@ export const TaskList = (props) => {
         }
 
         getTodos().then();
-    }, []);
+    }, [props.id]);
 
     const [newTask, setNewTask] = useState('');
     const handleChangeNewTask = (e) => {
@@ -26,7 +26,7 @@ export const TaskList = (props) => {
     }
 
     const addNewTask = async () => {
-        const response = await supabase.from('tasks').insert({ name: newTask.trim(), done: false }).select();
+        const response = await supabase.from('tasks').insert({ name: newTask.trim(), done: false, allListId: props.id }).select();
 
         if (response.error === null) {
             const insertedTask = response.data.at(0);
